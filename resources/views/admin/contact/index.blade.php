@@ -12,6 +12,7 @@
                     <div class="p-6 bg-white border-b border-gray-200">
                         <div class="d-flex justify-content-between">
                             <div>
+                                <p class="text-muted">{{ $Contact->created_at->format('Y/m/d') }}</p>
                                 <a href="{{ route('admin_contact_detail', $Contact->id) }}">
                                     <p class="my-2 ml-5">{{ $Contact->name }}様からのお問い合わせ</p>
                                 </a>
