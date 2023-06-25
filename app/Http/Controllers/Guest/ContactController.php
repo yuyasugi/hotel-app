@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers\Guest;
 
-use App\Models\Inquiry;
+use App\Http\Requests\Contact\StoreRequest;
 use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
 use App\Mail\GuestSendMail;
 use App\Mail\AdminSendMail;
 use App\Models\Contact;
@@ -17,28 +15,13 @@ class ContactController extends BaseController
         return view('guest.contact.index');
     }
 
-    public function confirm(Request $request){
-
-        $contact = $request->all();
-        // dd($inquiry);
-
-        if(!$contact){
-            return redirect()->route('guest.contact.index');
-        }
-        $request->validate([
-            'name' => 'required',
-             'email' => 'required',
-             'phone_number' => 'required',
-             'content' => 'required'
-         ]);
-
+    public function confirm(StoreRequest $request){
         return view('guest.contact.confirm',compact('contact'));
     }
 
-    public function store(Request $request){
+    public function store(StoreRequest $request){
 
         $contact = $request->all();
-        //  dd($inquirys);
 
         Contact::insert(['name' => $contact['name'], 'email' => $contact['email'], 'phone_number' => $contact['phone_number'], 'content' => $contact['content']]);
 
