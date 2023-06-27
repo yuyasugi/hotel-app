@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class ReserveSpace extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['room_id', 'date'];
+
+    public function room()
+    {
+        return $this->belongsTo(Room::class);
+    }
 }
