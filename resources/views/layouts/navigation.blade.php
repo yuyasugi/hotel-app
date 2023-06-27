@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('admin_contact')" :active="request()->routeIs('admin_contact')">
                         {{ __('お問い合わせ一覧') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin_reserve_space_index')" :active="request()->routeIs('admin_reserve_space_index')">
+                        {{ __('予約枠一覧') }}
+                    </x-nav-link>
                 </div>
             </div>
 

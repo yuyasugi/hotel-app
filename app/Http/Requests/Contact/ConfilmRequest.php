@@ -4,7 +4,7 @@ namespace App\Http\Requests\Contact;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRequest extends FormRequest
+class ConfilmRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -34,7 +34,7 @@ class StoreRequest extends FormRequest
         return [
             'name.required' => '名前は必ず入力して下さい。',
             'email.required' => 'メールアドレスは必ず入力して下さい。',
-            'phone_number.required' => '電話番号は必ず入力して下さい。',
+            'phone_number.regex:/^[0-9-]+$/' => '入力形式が違います。',
             'content.required' => 'お問い合わせ内容が必要です。',
         ];
     }
