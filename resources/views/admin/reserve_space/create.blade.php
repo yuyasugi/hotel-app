@@ -42,6 +42,20 @@
                             <input id="last_date"
                                 class="form-control mb-3 w-25 @error('last_date') is-invalid @enderror" required
                                 autocomplete="last_date" type="date" name="last_date" value="{{ old('last_date') }}">
+                            @error('last_date')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                            <label class="mt-3">予約枠解放数</label>
+                            <input id="count" type="number" max="10"
+                            class="form-control w-25 @error('count') is-invalid @enderror" name="count"
+                            value="{{ old('count') }}" required autocomplete="count" autofocus>
+                            @error('count')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <button class="btn btn-outline-success mt-2" type="submit">作成する</button>
                     </form>

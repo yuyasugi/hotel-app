@@ -9,7 +9,7 @@ class ReserveSpace extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['room_id', 'date'];
+    protected $fillable = ['room_id', 'date', 'count'];
 
     public function room()
     {

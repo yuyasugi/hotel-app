@@ -14,62 +14,47 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-            @if (session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @endif
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">日付</th>
-                        <th scope="col">部屋タイプ</th>
-                        <th scope="col">予約状況</th>
-                        <th scope="col">削除</th>
-                    </tr>
-                </thead>
-                @foreach ($ReserveSpaces as $ReserveSpace)
-                    <tbody>
+        <div class="card col-10 mx-auto">
+            <div class="p-5">
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                <table class="table">
+                    <thead>
                         <tr>
-                            <th scope="row">1</th>
-                            <td>{{ $ReserveSpace->date }}</td>
-                            <td>{{ $ReserveSpace->room->room_type }}</td>
-                            <td>
-                                @if ($ReserveSpace->reserve_flag === 0)
-                                    <form class="admin_inquiry_update"
-                                        action="{{ route('admin_reserve_space_update', $ReserveSpace->id) }}"
-                                        method="POST">
-                                        @csrf
-                                        <div class="form-group">
-                                            <button type="submit" class="btn btn btn-outline-success btn-sm" name="id"
-                                                value="{{ $ReserveSpace->id }}">予約可</button>
-                                        </div>
-                                    </form>
-                                @else
-                                    <form class="admin_inquiry_update"
-                                        action="{{ route('admin_reserve_space_update', $ReserveSpace->id) }}"
-                                        method="POST">
-                                        @csrf
-                                        <div class="form-group">
-                                            <button type="submit" class="btn btn-outline-secondary active btn-sm"
-                                                name="id" value="{{ $ReserveSpace->id }}">予約済み</button>
-                                        </div>
-                                    </form>
-                                @endif
-                            </td>
-                            <td>
-                                <form class="admin_reserve_space_destroy" method="POST"
-                                    action="{{ route('admin_reserve_space_destroy', $ReserveSpace->id) }}"> @csrf
-                                    <input type="hidden" name="id" value="{{ $ReserveSpace->id }}">
-                                    <button type="submit" class="btn btn-outline-secondary btn-sm">削除</button>
-                                </form>
-                            </td>
+                            <th scope="col">#</th>
+                            <th scope="col">日付</th>
+                            <th scope="col">部屋タイプ</th>
+                            <th scope="col">残り部屋数</th>
+                            <th scope="col">編集</th>
+                            <th scope="col">削除</th>
                         </tr>
-                    </tbody>
-                @endforeach
-            </table>
+                    </thead>
+                    @foreach ($ReserveSpaces as $ReserveSpace)
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>{{ $ReserveSpace->date }}</td>
+                                <td>{{ $ReserveSpace->room->room_type }}</td>
+                                <td>{{ $ReserveSpace->count }}</td>
+                                <td>
+                                    <a href="{{ route('admin_reserve_space_edit', $ReserveSpace->id) }}" class="btn btn-outline-secondary btn-sm mr-2">編集</a>
+                                    <input type="hidden" name="id" value="{{ $ReserveSpace->id }}">
+                                </td>
+                                <td>
+                                    <form class="admin_reserve_space_destroy" method="POST"
+                                        action="{{ route('admin_reserve_space_destroy', $ReserveSpace->id) }}"> @csrf
+                                        <input type="hidden" name="id" value="{{ $ReserveSpace->id }}">
+                                        <button type="submit" class="btn btn-outline-danger btn-sm" onclick='return confirm("本当に削除しますか？")'>削除</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    @endforeach
+                </table>
+            </div>
         </div>
     </div>
 </x-app-layout>

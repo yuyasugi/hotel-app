@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Guest\ContactController;
 use App\Http\Controllers\Admin\AdminContactController;
 use App\Http\Controllers\Admin\ReserveSpaceController;
+use App\Http\Controllers\Admin\PlanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,7 +46,13 @@ Route::get('/admin_contact_detail/{id}', [AdminContactController::class, 'admin_
 Route::get('/admin_reserve_space_create', [ReserveSpaceController::class, 'admin_reserve_space_create'])->middleware(['auth'])->name('admin_reserve_space_create');
 Route::post('/admin_reserve_space_store', [ReserveSpaceController::class, 'admin_reserve_space_store'])->middleware(['auth'])->name('admin_reserve_space_store');
 Route::get('/admin_reserve_space_index', [ReserveSpaceController::class, 'admin_reserve_space_index'])->middleware(['auth'])->name('admin_reserve_space_index');
+Route::get('/admin_reserve_space_edit/{id}', [ReserveSpaceController::class, 'admin_reserve_space_edit'])->middleware(['auth'])->name('admin_reserve_space_edit');
 Route::post('/admin_reserve_space_update/{id}', [ReserveSpaceController::class, 'admin_reserve_space_update'])->middleware(['auth'])->name('admin_reserve_space_update');
 Route::post('/admin_reserve_space_destroy/{id}', [ReserveSpaceController::class, 'admin_reserve_space_destroy'])->middleware(['auth'])->name('admin_reserve_space_destroy');
+
+Route::get('/admin_plan_create', [PlanController::class, 'admin_plan_create'])->middleware(['auth'])->name('admin_plan_create');
+Route::post('/admin_plan_store', [PlanController::class, 'admin_plan_store'])->middleware(['auth'])->name('admin_plan_store');
+Route::get('/admin_space_price_create', [PlanController::class, 'admin_space_price_create'])->middleware(['auth'])->name('admin_space_price_create');
+Route::post('/admin_space_price_store', [PlanController::class, 'admin_space_price_store'])->middleware(['auth'])->name('admin_space_price_store');
 
 require __DIR__.'/auth.php';
