@@ -42,14 +42,16 @@
                                 </span>
                                 @enderror
                             </div>
+                            {{-- 画像登録機能を作成する --}}
                             <div class="mt-3">
-                                <label for="highest_price">最高値：</label>
-                                <input id="highest_price" type="text" class="form-control @error('highest_price') is-invalid @enderror w-25" required autocomplete="highest_price" name="highest_price" value="{{ old('highest_price') }}">
-                                @error('highest_price')
+                                <label for="images">画像：</label><br>
+                                <input id="images" type="file" class="form-control @error('images.*') is-invalid @enderror" name="images[]" multiple>
+                                @error('images.*')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
+                                <div id="image_preview"></div> <!-- 画像プレビューを表示する場所 -->
                             </div>
                             <div class="mt-3">
                                 <label for="meal">食事：</label><br>
@@ -71,4 +73,24 @@
             </div>
         </div>
     </div>
+
+    <script>
+        window.addEventListener('load', function() {
+            document.querySelector('#images').addEventListener('change', function(e) {
+                var imagePreview = document.querySelector('#image_preview');
+                imagePreview.innerHTML = '';
+
+                Array.from(e.target.files).forEach(file => {
+                    var img = document.createElement('img');
+                    img.src = URL.createObjectURL(file);
+                    img.className = "preview-image";
+                    img.onload = function() {
+                        URL.revokeObjectURL(this.src);
+                    }
+                    imagePreview.appendChild(img);
+                });
+            });
+        });
+        </script>
+
 </x-app-layout>

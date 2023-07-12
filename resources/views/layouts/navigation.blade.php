@@ -21,6 +21,12 @@
                     <x-nav-link :href="route('admin_reserve_space_index')" :active="request()->routeIs('admin_reserve_space_index')">
                         {{ __('予約枠一覧') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin_plan_index')" :active="request()->routeIs('admin_plan_index')">
+                        {{ __('宿泊プラン一覧') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('admin_space_price_create')" :active="request()->routeIs('admin_space_price_create')">
+                        {{ __('宿泊プラン料金設定') }}
+                    </x-nav-link>
                 </div>
             </div>
 

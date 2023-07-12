@@ -18,7 +18,13 @@
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        
+
+        <style>
+            .preview-image {
+                max-height: 50px;  // 最大高さを50pxに設定
+                width: auto;  // 幅は自動（アスペクト比を保つ）
+            }
+            </style>
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">

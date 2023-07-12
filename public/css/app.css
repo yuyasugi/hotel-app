@@ -84,6 +84,12 @@ h6 {
   font-weight: inherit;
 }
 
+.weekend {
+    background-color: yellow; /* セルの背景色を黄色に設定 */
+    font-weight: bold; /* テキストを太字に設定 */
+}
+
+
 /*
 Reset links to optimize for opt-in styling instead of opt-out.
 */
