@@ -50,6 +50,7 @@ Route::get('/admin_reserve_space_edit/{id}', [ReserveSpaceController::class, 'ad
 Route::post('/admin_reserve_space_update/{id}', [ReserveSpaceController::class, 'admin_reserve_space_update'])->middleware(['auth'])->name('admin_reserve_space_update');
 Route::post('/admin_reserve_space_destroy/{id}', [ReserveSpaceController::class, 'admin_reserve_space_destroy'])->middleware(['auth'])->name('admin_reserve_space_destroy');
 
+Route::get('/admin_plan_index', [PlanController::class, 'admin_plan_index'])->middleware(['auth'])->name('admin_plan_index');
 Route::get('/admin_plan_create', [PlanController::class, 'admin_plan_create'])->middleware(['auth'])->name('admin_plan_create');
 Route::post('/admin_plan_store', [PlanController::class, 'admin_plan_store'])->middleware(['auth'])->name('admin_plan_store');
 Route::get('/admin_space_price_create', [PlanController::class, 'admin_space_price_create'])->middleware(['auth'])->name('admin_space_price_create');
