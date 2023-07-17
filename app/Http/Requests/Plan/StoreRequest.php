@@ -22,11 +22,10 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required', 'string'],
-            'content' => ['required'],
-            'cheapest_price' => ['required', 'numeric'],
-            'highest_price' => ['required', 'numeric'],
-            'meal' => ['required'],
+            'title' => 'required',
+            'content' => 'required',
+            'cheapest_price' => 'required',
+            'images.*' => 'mimes:jpg,jpeg',  // images[]の各要素がjpgまたはjpegであることをチェック
         ];
     }
 
@@ -36,8 +35,7 @@ class StoreRequest extends FormRequest
             'title.required' => 'タイトルは必ず入力して下さい。',
             'content.required' => '内容は必ず入力して下さい。',
             'cheapest_price.required' => '最安値は必ず入力して下さい。',
-            'highest_price.required' => '最高値は必ず入力して下さい。',
-            'meal.required' => '食事は必ず入力して下さい。',
+            'images.*.required' => 'jpgまたはjpegのファイルを選択してください。',
         ];
     }
 }
