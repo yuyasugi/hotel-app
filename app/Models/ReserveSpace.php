@@ -15,4 +15,9 @@ class ReserveSpace extends Model
     {
         return $this->belongsTo(Room::class);
     }
+
+    public function space_price()
+    {
+        return $this->hasMany(SpacePrice::class);
+    }
 }

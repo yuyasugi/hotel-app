@@ -9,5 +9,10 @@ class Plan extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'content', 'cheapest_price', 'highest_price', 'meal'];
+    protected $fillable = ['title', 'content', 'cheapest_price'];
+
+    public function images()
+{
+    return $this->hasMany(PlanImage::class);
+}
 }

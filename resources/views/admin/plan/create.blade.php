@@ -12,7 +12,7 @@
                     @if (count($errors) > 0)
                     <p class="text-danger">入力に問題があります。再入力してください。</p>
                     @endif
-                    <form class="admin_plan_create" method="POST" action="{{ route('admin_plan_store') }}">
+                    <form class="admin_plan_create" method="POST" action="{{ route('admin_plan_store') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <div class="mt-3">
@@ -26,7 +26,7 @@
                             </div>
                             <div class="mt-3">
                                 <label for="content">内容：</label><br>
-                                <textarea id="content" type="text" class="form-control @error('content') is-invalid @enderror" required autocomplete="content" name="content" value="{{ old('content') }}"></textarea>
+                                <textarea rows="10" id="content" type="text" class="form-control @error('content') is-invalid @enderror" required autocomplete="content" name="content" value="{{ old('content') }}"></textarea>
                                 @error('content')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -44,30 +44,30 @@
                             </div>
                             {{-- 画像登録機能を作成する --}}
                             <div class="mt-3">
-                                <label for="images">画像：</label><br>
-                                <input id="images" type="file" class="form-control @error('images.*') is-invalid @enderror" name="images[]" multiple>
+                                <label id="upload_label" class="btn btn-success" for="images">画像を選択</label>
+                                <input id="images" type="file" class="d-none" name="images[]" multiple>
                                 @error('images.*')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
-                                <div id="image_preview"></div> <!-- 画像プレビューを表示する場所 -->
+                                <div id="image_preview" class="row mt-3"></div> <!-- 画像プレビューを表示する場所 -->
                             </div>
-                            <div class="mt-3">
-                                <label for="meal">食事：</label><br>
-                                <select id="meal" class="form-control @error('meal') is-invalid @enderror w-25" required autocomplete="meal" name="meal" value="{{ old('meal') }}">
+                            {{-- <div class="mt-3">
+                                <label for="meal_state">食事：</label><br>
+                                <select id="meal_state" class="form-control @error('meal_state') is-invalid @enderror w-25" required autocomplete="meal_state" name="meal_state" value="{{ old('meal_state') }}">
                                     <option value="食事なし">食事なし</option>
                                     <option value="朝食あり">朝食あり</option>
                                     <option value="2食付き">2食付き</option>
                                 </select>
-                                @error('meal')
+                                @error('meal_state')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            </div>
+                            </div> --}}
                         </div>
-                        <button class="btn btn-outline-success mt-2" type="submit">予約枠ごとの料金設定へ</button>
+                        <button class="btn btn-outline-success" type="submit">予約枠ごとの料金設定へ</button>
                     </form>
                 </div>
             </div>
@@ -75,20 +75,18 @@
     </div>
 
     <script>
-        window.addEventListener('load', function() {
-            document.querySelector('#images').addEventListener('change', function(e) {
-                var imagePreview = document.querySelector('#image_preview');
-                imagePreview.innerHTML = '';
-
-                Array.from(e.target.files).forEach(file => {
-                    var img = document.createElement('img');
-                    img.src = URL.createObjectURL(file);
-                    img.className = "preview-image";
-                    img.onload = function() {
-                        URL.revokeObjectURL(this.src);
-                    }
+        document.querySelector("#images").addEventListener("change", function(e){
+            let imagePreview = document.querySelector("#image_preview");
+            imagePreview.innerHTML = ""; // Clear the preview
+            Array.from(e.target.files).forEach(file => {
+                let reader = new FileReader();
+                reader.onloadend = function() {
+                    let img = document.createElement("img");
+                    img.src = reader.result;
+                    img.classList.add("img-thumbnail", "col-md-3"); // Add Bootstrap classes
                     imagePreview.appendChild(img);
-                });
+                }
+                reader.readAsDataURL(file);
             });
         });
         </script>

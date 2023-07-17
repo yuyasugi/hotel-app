@@ -5,12 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SpacePrice extends Model
+class PlanImage extends Model
 {
     use HasFactory;
 
-    public function reserve_space()
+    protected $fillable = ['plan_id', 'filename'];
+
+    public function plan()
     {
-        return $this->belongsTo(ReserveSpace::class);
+        return $this->belongsTo(Plan::class);
     }
 }
