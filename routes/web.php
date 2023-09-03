@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\AdminContactController;
 use App\Http\Controllers\Admin\ReserveSpaceController;
 use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Admin\ImageController;
+use App\Http\Controllers\Guest\SpacePriceController;
+use App\Http\Controllers\Guest\UserPlanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +42,9 @@ Route::post('/contact/confirm', [ContactController::class, 'confirm'])->name('co
 Route::post('/contact/store', [ContactController::class, 'store'])->name('contact_store');
 Route::get('/thanks', [ContactController::class, 'store']);
 
+Route::get('/plan', [UserPlanController::class, 'index'])->name('plan');
+Route::get('/show/{id}', [UserPlanController::class, 'show'])->name('show');
+
 Route::get('/admin_contact', [AdminContactController::class, 'admin_contact'])->middleware(['auth'])->name('admin_contact');
 Route::post('/admin_contact_update/{id}', [AdminContactController::class, 'admin_contact_update'])->middleware(['auth'])->name('admin_contact_update');
 Route::get('/admin_contact_detail/{id}', [AdminContactController::class, 'admin_contact_detail'])->middleware(['auth'])->name('admin_contact_detail');
@@ -63,6 +68,9 @@ Route::post('/admin_space_price_update/{id}', [PlanController::class, 'admin_spa
 Route::get('/admin_plan_edit/{id}', [PlanController::class, 'admin_plan_edit'])->middleware(['auth'])->name('admin_plan_edit');
 Route::post('/admin_plan_update/{id}', [PlanController::class, 'admin_plan_update'])->middleware(['auth'])->name('admin_plan_update');
 Route::post('/admin_plan_destroy/{id}', [PlanController::class, 'admin_plan_destroy'])->middleware(['auth'])->name('admin_plan_destroy');
+
+Route::get('/get-space-prices', [SpacePriceController::class, 'getSpacePrices']);
+
 
 Route::delete('/images/{id}', [ImageController::class, 'destroy']);
 require __DIR__.'/auth.php';
